@@ -101,22 +101,24 @@ class LeaderboardEntriesSerializer(serializers.ModelSerializer):
         # desc == -colname
         # asc == colname
         primary_col = instance.columns.get(index=instance.primary_index)
-        # Order first by primary column. Then order by other columns after for tie breakers.
-        ordering = [
-            F('primary_col').desc(nulls_last=True)
-            if primary_col.sorting == 'desc'
-            else F('primary_col').asc(nulls_last=True)
-        ]
-        submissions = (
+        base_qs = (
             Submission.objects.filter(
                 leaderboard=instance,
                 is_specific_task_re_run=False
             )
             .select_related('owner')
             .prefetch_related('scores')
-            .annotate(primary_col=Sum('scores__score', filter=Q(scores__column=primary_col)))
         )
+        # AVERAGE_RANK columns have no stored scores; skip DB-level sort and re-sort in the view.
+        if primary_col.computation == Column.AVERAGE_RANK:
+            ordering = ['created_when']
+            submissions = base_qs
+        else:
+            ordering = [f'{"-" if primary_col.sorting == "desc" else ""}primary_col']
+            submissions = base_qs.annotate(primary_col=Sum('scores__score', filter=Q(scores__column=primary_col)))
         for column in instance.columns.exclude(id=primary_col.id).order_by('index'):
+            if column.computation == Column.AVERAGE_RANK:
+                continue
             col_name = f'col{column.index}'
             ordering.append(
                 F(col_name).desc(nulls_last=True)
@@ -165,12 +167,7 @@ class LeaderboardPhaseSerializer(serializers.ModelSerializer):
         # desc == -colname
         # asc == colname
         primary_col = instance.leaderboard.columns.get(index=instance.leaderboard.primary_index)
-        ordering = [
-            F('primary_col').desc(nulls_last=True)
-            if primary_col.sorting == 'desc'
-            else F('primary_col').asc(nulls_last=True)
-        ]
-        submissions = (
+        base_qs = (
             Submission.objects.filter(
                 phase=instance,
                 is_soft_deleted=False,
@@ -180,14 +177,22 @@ class LeaderboardPhaseSerializer(serializers.ModelSerializer):
             )
             .select_related('owner')
             .prefetch_related('scores', 'scores__column')
-            .annotate(primary_col=Sum('scores__score', filter=Q(scores__column=primary_col)))
         )
+        # AVERAGE_RANK columns have no stored scores; skip DB-level sort and re-sort in the view.
+        if primary_col.computation == Column.AVERAGE_RANK:
+            ordering = ['created_when']
+            submissions = base_qs
+        else:
+            ordering = [f'{"-" if primary_col.sorting == "desc" else ""}primary_col']
+            submissions = base_qs.annotate(primary_col=Sum('scores__score', filter=Q(scores__column=primary_col)))
         for column in (
             instance.leaderboard.columns
             .filter(hidden=False)
             .exclude(id=primary_col.id)
             .order_by('index')
         ):
+            if column.computation == Column.AVERAGE_RANK:
+                continue
             col_name = f'col{column.index}'
             ordering.append(
                 F(col_name).desc(nulls_last=True)
