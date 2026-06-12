@@ -1,0 +1,72 @@
+# Codabench competition bundle — Co-Study4Grid Game Mode
+# Copyright (c) 2025-2026, RTE (https://www.rte-france.com)
+# SPDX-License-Identifier: MPL-2.0
+#
+# Build the uploadable zip with ./package.sh (zips the program/data folders
+# into the *.zip names referenced below, then zips the whole bundle).
+title: Co-Study4Grid — N-1 Remediation Challenge
+description: >
+  Solve real power-grid N-1 contingencies under time pressure. Each study trips
+  a line on the PyPSA-EUR France 225/400 kV grid and pushes a line over 100%
+  loading. Bring the grid back under limits using at most 3 remedial actions,
+  as fast as you can. Submit the game_session.json your Co-Study4Grid Game Mode
+  session produced.
+image: logo.png
+terms: terms.md
+pages:
+  - title: Overview
+    file: overview.md
+  - title: Evaluation
+    file: evaluation.md
+  - title: Data
+    file: data.md
+  - title: Terms
+    file: terms.md
+phases:
+  - index: 0
+    name: Open phase
+    description: >
+      Submit your recorded game sessions. The official study set is the
+      8-contingency fr225_400 challenge described under Data.
+    start: 2026-06-01
+    end: 2030-01-01
+    max_submissions_per_day: 50
+    max_submissions: 1000
+    tasks:
+      - 0
+tasks:
+  - index: 0
+    name: fr225_400 N-1 remediation
+    description: >
+      Score a recorded Co-Study4Grid Game Mode session against the official
+      study manifest.
+    scoring_program: scoring_program.zip
+    ingestion_program: ingestion_program.zip
+    reference_data: reference_data.zip
+    input_data: reference_data.zip
+solutions:
+  - index: 0
+    path: starting_kit.zip
+    tasks:
+      - 0
+leaderboards:
+  - title: Results
+    key: main
+    columns:
+      - title: Final score
+        key: final_score
+        index: 0
+        sorting: desc
+        computation: avg
+      - title: Studies solved
+        key: solved_count
+        index: 1
+        sorting: desc
+      - title: Avg actions
+        key: avg_actions
+        index: 2
+        sorting: asc
+      - title: Avg time (s)
+        key: avg_time_s
+        index: 3
+        sorting: asc

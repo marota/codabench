@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "sessionName": "Training session",
+  "player": "demo-operator",
+  "startedAt": "2026-06-12T09:00:00.000Z",
+  "endedAt": "2026-06-12T09:07:30.000Z",
+  "config": { "timerSeconds": 180, "maxActions": 3, "nStudies": 3 },
+  "studies": [
+    {
+      "studyId": "s1",
+      "label": "Toulouse 225 kV — Saint-Orens - Verfeil",
+      "contingencyElementId": "way_109818602-225",
+      "contingencyLabel": "Saint-Orens - Verfeil",
+      "startedAt": "2026-06-12T09:00:00.000Z",
+      "endedAt": "2026-06-12T09:01:05.000Z",
+      "durationMs": 65000,
+      "timedOut": false,
+      "timeLimitSeconds": 180,
+      "maxActions": 3,
+      "actionsChosen": [
+        { "actionId": "disco_merged_relation_6194778_b-225_4", "description": "Open line BERGHL61MARL6", "maxRho": 0.94, "linesOverloadedAfter": [], "solved": true }
+      ],
+      "numActions": 1,
+      "baselineMaxRho": 1.30,
+      "finalMaxRho": 0.94,
+      "solved": true
+    },
+    {
+      "studyId": "s2",
+      "label": "Biancon 225 kV — way/121500507",
+      "contingencyElementId": "way_121500507-225",
+      "contingencyLabel": "way/121500507",
+      "startedAt": "2026-06-12T09:01:05.000Z",
+      "endedAt": "2026-06-12T09:03:40.000Z",
+      "durationMs": 155000,
+      "timedOut": false,
+      "timeLimitSeconds": 180,
+      "maxActions": 3,
+      "actionsChosen": [
+        { "actionId": "disco_merged_relation_5465776-225_1", "description": "Open line ISSOIL61LIGNA", "maxRho": 1.08, "linesOverloadedAfter": ["relation_x"], "solved": false },
+        { "actionId": "disco_merged_relation_6028662-225_1", "description": "Open line C.RHOL62L.NEU", "maxRho": 0.99, "linesOverloadedAfter": [], "solved": true }
+      ],
+      "numActions": 2,
+      "baselineMaxRho": 1.30,
+      "finalMaxRho": 0.99,
+      "solved": true
+    },
+    {
+      "studyId": "s3",
+      "label": "Valence 225 kV — B.MONL61VALE8",
+      "contingencyElementId": "relation_6028666_c-225",
+      "contingencyLabel": "B.MONL61VALE8",
+      "startedAt": "2026-06-12T09:03:40.000Z",
+      "endedAt": "2026-06-12T09:07:30.000Z",
+      "durationMs": 180000,
+      "timedOut": true,
+      "timeLimitSeconds": 180,
+      "maxActions": 3,
+      "actionsChosen": [
+        { "actionId": "disco_merged_relation_10264161-225_1", "description": "Open line COUDOL62GARD7", "maxRho": 1.18, "linesOverloadedAfter": ["relation_y"], "solved": false }
+      ],
+      "numActions": 1,
+      "baselineMaxRho": 1.30,
+      "finalMaxRho": 1.18,
+      "solved": false
+    }
+  ]
+}

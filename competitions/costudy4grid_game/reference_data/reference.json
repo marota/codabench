@@ -1,0 +1,17 @@
+{
+  "sessionName": "Co-Study4Grid Official Challenge — PyPSA-EUR France 225/400 kV",
+  "network": "data/pypsa_eur_fr225_400/network.xiidm",
+  "actionCatalogue": "data/pypsa_eur_fr225_400/actions.json",
+  "maxActionsAllowed": 3,
+  "description": "Official N-1 remediation challenge. Each study is a single-line contingency on the fr225_400 grid that drives a >100% overload and has a known remediation (can_proceed=True under the expert model). Bring every monitored line back under 100% using at most 3 remedial actions, as fast as you can.",
+  "studies": [
+    { "studyId": "s1", "contingencyElementId": "way_109818602-225", "contingencyLabel": "Saint-Orens - Verfeil", "baselineMaxLoadingPct": 130.0 },
+    { "studyId": "s2", "contingencyElementId": "way_121500507-225", "contingencyLabel": "way/121500507", "baselineMaxLoadingPct": 130.0 },
+    { "studyId": "s3", "contingencyElementId": "relation_6028666_c-225", "contingencyLabel": "B.MONL61VALE8", "baselineMaxLoadingPct": 130.0 },
+    { "studyId": "s4", "contingencyElementId": "relation_8307566_d-225", "contingencyLabel": "BREUIL63CHAST", "baselineMaxLoadingPct": 130.0 },
+    { "studyId": "s5", "contingencyElementId": "way_1463717755-225", "contingencyLabel": "way/1463717755", "baselineMaxLoadingPct": 130.0 },
+    { "studyId": "s6", "contingencyElementId": "way_130969307-225", "contingencyLabel": "Échalas - Le Soleil", "baselineMaxLoadingPct": 130.0 },
+    { "studyId": "s7", "contingencyElementId": "merged_way_100497456-400_1", "contingencyLabel": "Cornier - Génissiat", "baselineMaxLoadingPct": 123.2 },
+    { "studyId": "s8", "contingencyElementId": "way_204035714-225", "contingencyLabel": "Liers - Villejust", "baselineMaxLoadingPct": 130.0 }
+  ]
+}
