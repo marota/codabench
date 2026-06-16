@@ -63,7 +63,6 @@ leaderboards:
         key: final_score
         index: 0
         sorting: desc
-        computation: avg
       - title: Studies solved
         key: solved_count
         index: 1
