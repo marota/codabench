@@ -4,6 +4,12 @@
 #
 # Build the uploadable zip with ./package.sh (zips the program/data folders
 # into the *.zip names referenced below, then zips the whole bundle).
+#
+# `version: 2` selects Codabench's V2 unpacker. Without it, Codabench defaults
+# to version 1 and parses this file with the legacy CodaLab unpacker, which
+# expects an `html:` page map and fails with "HTML pages could not be found in
+# the yaml file" on the v2 `pages:` list below.
+version: 2
 title: Co-Study4Grid — N-1 Remediation Challenge
 description: >
   Solve real power-grid N-1 contingencies under time pressure. Each study trips
